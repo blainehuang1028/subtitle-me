@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "job": "demo",
+  "completed": true,
+  "updatedAt": "2026-09-05T00:00:00.000Z",
+  "terms": [
+    {
+      "en": "Northwind Lab",
+      "aliases": [],
+      "category": "organization",
+      "cueIndexes": [1],
+      "reason": "A named fictional organization used in the demo."
+    },
+    {
+      "en": "Focus Mode",
+      "aliases": [],
+      "category": "feature",
+      "cueIndexes": [2, 19],
+      "reason": "A recurring named feature."
+    },
+    {
+      "en": "Delta Board",
+      "aliases": [],
+      "category": "interface",
+      "cueIndexes": [5],
+      "reason": "A named fictional interface."
+    }
+  ]
+}

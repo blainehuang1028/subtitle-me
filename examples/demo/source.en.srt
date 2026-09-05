@@ -1,0 +1,79 @@
+1
+00:00:00,000 --> 00:00:03,200
+Welcome to Northwind Lab.
+
+2
+00:00:03,200 --> 00:00:06,400
+Today we're testing Focus Mode.
+
+3
+00:00:06,400 --> 00:00:09,600
+It hides alerts for 25 minutes.
+
+4
+00:00:09,600 --> 00:00:12,800
+Your current task stays on screen.
+
+5
+00:00:12,800 --> 00:00:16,000
+Open the Delta Board to begin.
+
+6
+00:00:16,000 --> 00:00:19,200
+Choose one small goal.
+
+7
+00:00:19,200 --> 00:00:22,400
+Then press Start Session.
+
+8
+00:00:22,400 --> 00:00:25,600
+The timer begins immediately.
+
+9
+00:00:25,600 --> 00:00:28,800
+You can pause it at any time.
+
+10
+00:00:28,800 --> 00:00:32,000
+Paused time is not counted.
+
+11
+00:00:32,000 --> 00:00:35,200
+A soft sound marks the halfway point.
+
+12
+00:00:35,200 --> 00:00:38,400
+Nothing else changes on your desktop.
+
+13
+00:00:38,400 --> 00:00:41,600
+When the session ends, alerts return.
+
+14
+00:00:41,600 --> 00:00:44,800
+Your progress is saved locally.
+
+15
+00:00:44,800 --> 00:00:48,000
+No account is required.
+
+16
+00:00:48,000 --> 00:00:51,200
+We completed 3 sessions this morning.
+
+17
+00:00:51,200 --> 00:00:54,400
+The shortest one lasted 8 minutes.
+
+18
+00:00:54,400 --> 00:00:57,600
+That was enough to finish the outline.
+
+19
+00:00:57,600 --> 00:01:00,800
+Try Focus Mode with your next task.
+
+20
+00:01:00,800 --> 00:01:04,000
+Thanks for watching.

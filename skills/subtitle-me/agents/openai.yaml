@@ -1,0 +1,7 @@
+interface:
+  display_name: "Subtitle Me"
+  short_description: "Translate timed English captions into reviewed Chinese."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/logo-light.svg"
+  brand_color: "#5B7CFA"
+  default_prompt: "Use $subtitle-me to translate my timed English subtitles into Simplified Chinese."

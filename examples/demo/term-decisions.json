@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "job": "demo",
+  "completed": true,
+  "updatedAt": "2026-09-05T00:00:00.000Z",
+  "terms": [
+    {
+      "en": "Northwind Lab",
+      "aliases": [],
+      "zhHans": "北风实验室",
+      "category": "organization",
+      "approvalStatus": "approved",
+      "syncScope": "project",
+      "status": "user-approved",
+      "rationale": "Keep the fictional organization name consistent across this project."
+    },
+    {
+      "en": "Focus Mode",
+      "aliases": [],
+      "zhHans": "专注模式",
+      "category": "feature",
+      "approvalStatus": "approved",
+      "syncScope": "project",
+      "status": "user-approved",
+      "rationale": "Natural Simplified Chinese label for the named feature."
+    },
+    {
+      "en": "Delta Board",
+      "aliases": [],
+      "zhHans": "Delta看板",
+      "category": "interface",
+      "approvalStatus": "approved",
+      "syncScope": "project",
+      "status": "user-approved",
+      "rationale": "Preserve the product token and translate the interface noun."
+    }
+  ]
+}

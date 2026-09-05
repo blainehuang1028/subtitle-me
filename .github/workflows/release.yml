@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  release-test:
+    name: Release gate / ${{ matrix.os }} / Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run validate
+      - run: npm run smoke:install
+      - run: node .agents/skills/subtitle-me/scripts/subtitle-me.mjs doctor
+      - run: node scripts/smoke-cli.mjs --cli .agents/skills/subtitle-me/scripts/subtitle-me.mjs
+
+  publish:
+    name: Publish GitHub Release
+    runs-on: ubuntu-latest
+    needs: release-test
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Verify tag and package version match
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node -e "const fs=require('node:fs');const version=fs.readFileSync('skills/subtitle-me/VERSION','utf8').trim();if(process.env.RELEASE_TAG!==('v'+version)){throw new Error('tag '+process.env.RELEASE_TAG+' does not match v'+version)}"
+      - run: npm run package:workbuddy
+      - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          generate_release_notes: true
+          files: dist/*.zip

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Subtitle Me demo output and QA</title>
+  <desc id="desc">English and Chinese subtitle examples beside a passing QA report with one visible warning.</desc>
+  <rect width="1280" height="720" rx="30" fill="#F5F7FC"/>
+  <text x="62" y="72" fill="#101522" font-family="Arial, sans-serif" font-size="34" font-weight="700">20-cue neutral demo</text>
+  <rect x="52" y="110" width="742" height="540" rx="24" fill="#FFFFFF" stroke="#DCE2F0" stroke-width="2"/>
+  <text x="82" y="158" fill="#67728B" font-family="Arial, sans-serif" font-size="20">SOURCE · ENGLISH</text>
+  <text x="82" y="205" fill="#101522" font-family="Arial, sans-serif" font-size="25">Today we're testing Focus Mode.</text>
+  <text x="82" y="244" fill="#8A94A9" font-family="SFMono-Regular, Consolas, monospace" font-size="18">00:00:03,200 → 00:00:06,400</text>
+  <line x1="82" y1="284" x2="764" y2="284" stroke="#E4E8F2" stroke-width="2"/>
+  <text x="82" y="334" fill="#67728B" font-family="Arial, sans-serif" font-size="20">READABLE · 简体中文</text>
+  <text x="82" y="386" fill="#101522" font-family="Arial, sans-serif" font-size="32" font-weight="650">今天测试专注模式。</text>
+  <text x="82" y="430" fill="#8A94A9" font-family="SFMono-Regular, Consolas, monospace" font-size="18">00:00:03,200 → 00:00:06,400</text>
+  <rect x="82" y="494" width="440" height="96" rx="16" fill="#EEF2FF"/>
+  <text x="108" y="534" fill="#405BC2" font-family="Arial, sans-serif" font-size="19">PROJECT TERM</text>
+  <text x="108" y="567" fill="#101522" font-family="Arial, sans-serif" font-size="24">Focus Mode → 专注模式</text>
+  <rect x="834" y="110" width="394" height="540" rx="24" fill="#101522"/>
+  <text x="870" y="164" fill="#AEB8D0" font-family="Arial, sans-serif" font-size="20">DETERMINISTIC QA</text>
+  <rect x="870" y="196" width="132" height="52" rx="26" fill="#173E33"/>
+  <text x="936" y="231" fill="#65D49A" font-family="Arial, sans-serif" font-size="23" font-weight="700" text-anchor="middle">PASS</text>
+  <g font-family="SFMono-Regular, Consolas, monospace" font-size="20">
+    <text x="870" y="302" fill="#AEB8D0">source cues</text>
+    <text x="1188" y="302" fill="#EEF3FF" text-anchor="end">20</text>
+    <text x="870" y="344" fill="#AEB8D0">readable cues</text>
+    <text x="1188" y="344" fill="#EEF3FF" text-anchor="end">20</text>
+    <text x="870" y="386" fill="#AEB8D0">errors</text>
+    <text x="1188" y="386" fill="#65D49A" text-anchor="end">0</text>
+    <text x="870" y="428" fill="#AEB8D0">warnings</text>
+    <text x="1188" y="428" fill="#FFCF66" text-anchor="end">1</text>
+  </g>
+  <line x1="870" y1="466" x2="1192" y2="466" stroke="#34405A" stroke-width="2"/>
+  <text x="870" y="510" fill="#FFCF66" font-family="Arial, sans-serif" font-size="18">VISIBLE WARNING</text>
+  <text x="870" y="548" fill="#EEF3FF" font-family="Arial, sans-serif" font-size="20">Cue 5 keeps “Delta”</text>
+  <text x="870" y="579" fill="#EEF3FF" font-family="Arial, sans-serif" font-size="20">in Latin script.</text>
+  <text x="870" y="620" fill="#AEB8D0" font-family="Arial, sans-serif" font-size="17">Warnings are never hidden.</text>
+</svg>

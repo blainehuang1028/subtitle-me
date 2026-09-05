@@ -1,0 +1,27 @@
+{
+  "name": "subtitle-me-skill",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent Skill for English to Simplified Chinese subtitle localization",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "doctor": "node skills/subtitle-me/scripts/subtitle-me.mjs doctor",
+    "test": "node --test",
+    "smoke:cli": "node scripts/smoke-cli.mjs",
+    "smoke:install": "skills add . --agent codex -y",
+    "validate": "node scripts/validate-repo.mjs",
+    "package:workbuddy": "node scripts/package-workbuddy.mjs"
+  },
+  "license": "MIT",
+  "author": "Kai Huang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blainehuang1028/subtitle-me.git"
+  },
+  "devDependencies": {
+    "skills": "1.5.18"
+  }
+}

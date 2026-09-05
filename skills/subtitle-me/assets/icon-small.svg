@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Subtitle Me icon</title>
+  <desc id="desc">A subtitle frame with English and Chinese lines connected by a translation arrow.</desc>
+  <rect width="256" height="256" rx="56" fill="#101522"/>
+  <path d="M50 57h156a18 18 0 0 1 18 18v96a18 18 0 0 1-18 18h-70l-34 27v-27H50a18 18 0 0 1-18-18V75a18 18 0 0 1 18-18Z" fill="#5B7CFA"/>
+  <rect x="58" y="86" width="70" height="12" rx="6" fill="#fff"/>
+  <rect x="58" y="111" width="102" height="12" rx="6" fill="#fff" opacity=".7"/>
+  <path d="M169 91h28l-9-9m9 9-9 9" fill="none" stroke="#FFCF66" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="58" y="161" fill="#fff" font-family="Arial, sans-serif" font-size="31" font-weight="700">字幕</text>
+</svg>
