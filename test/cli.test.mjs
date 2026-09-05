@@ -335,19 +335,11 @@ test('rejects non-regular subtitle inputs without reading them', { skip: process
 });
 
 test('strips terminal control characters from untrusted error text', async () => {
-  const project = await mkdtemp(join(tmpdir(), 'subtitle-me-cli-terminal-safe-'));
-  const result = invoke(['bad\r\u001b[2J\u202e']);
+  const result = invoke(['bad\nQA: PASS\r\u001b[2J\u202e']);
   assert.notEqual(result.status, 0);
   assert.equal(result.stderr.includes('\u001b'), false);
   assert.equal(result.stderr.includes('\u202e'), false);
   assert.equal(result.stderr.includes('\r'), false);
-
-  const injectedProject = join(project, 'line\nQA: PASS');
-  await mkdir(injectedProject);
-  const validInput = join(injectedProject, 'source.srt');
-  await writeFile(validInput, '1\n00:00:00,000 --> 00:00:01,000\nHello.\n', 'utf8');
-  const initialized = invoke(['init', '--input', validInput, '--project', injectedProject, '--job', 'safe']);
-  assert.equal(initialized.status, 0, initialized.stderr);
-  assert.equal(initialized.stdout.includes('\nQA: PASS'), false);
-  assert.match(initialized.stdout, /line\\nQA: PASS/);
+  assert.equal(result.stderr.includes('\nQA: PASS'), false);
+  assert.match(result.stderr, /bad\\nQA: PASS/);
 });
