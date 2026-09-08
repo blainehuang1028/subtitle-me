@@ -23,7 +23,7 @@ test("website and documentation agree on the public install command", async () =
 test("website local resources and glossary examples exist", async () => {
   const html = await read("website/index.html");
   for (const [, resource] of html.matchAll(/(?:href|src)="\.\/([^"]+)"/g)) {
-    await access(new URL(`website/${resource}`, root));
+    await access(new URL(`website/${resource.split("?")[0]}`, root));
   }
   const terms = JSON.parse(
     await read("examples/demo/term-decisions.json"),
@@ -59,6 +59,19 @@ test("production SEO uses one canonical URL and valid source-backed structured d
   assert.equal(image.subarray(1, 4).toString(), "PNG");
   assert.equal(image.readUInt32BE(16), 1280);
   assert.equal(image.readUInt32BE(20), 640);
+});
+
+test("product story retains personal source links and a navigable section", async () => {
+  const html = await read("website/index.html");
+  assert.ok(html.includes('href="#story"'));
+  assert.ok(html.includes('id="story"'));
+  for (const source of ["https://heyblaine.com/projects/subtitle-me", "https://heyblaine.com/about"]) {
+    assert.ok(html.includes(`href="${source}"`));
+  }
+  assert.match(html, /涉外商务笔译/);
+  assert.match(html, /memoQ/);
+  assert.match(html, /Marathon/);
+  assert.doesNotMatch(html, /class="leader"/);
 });
 
 async function clipboardFixture(clipboard) {

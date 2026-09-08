@@ -63,7 +63,7 @@
       }
     </script>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.css?v=story-20260908" />
     <script type="module" src="./app.js"></script>
   </head>
   <body>
@@ -71,6 +71,7 @@
     <header class="header wrap">
       <a class="brand" href="#" aria-label="subtitle-me 首页">subtitle-me</a>
       <nav aria-label="主导航">
+        <a href="#story" class="story-nav">产品故事</a>
         <a href="#glossary">术语库</a><a href="#review">AI 核验</a
         ><a href="#install">安装</a
         ><a href="https://github.com/blainehuang1028/subtitle-me"
@@ -110,7 +111,6 @@
           </div>
           <p class="translation">今天测试<mark>专注模式</mark>。</p>
           <div class="term-note">
-            <span class="leader" aria-hidden="true"></span>
             <p>
               <span lang="en">Focus Mode</span>
               <span aria-hidden="true">→</span> 专注模式
@@ -198,6 +198,22 @@
             </p>
           </div>
         </figure>
+      </section>
+      <section class="story split wrap" id="story" aria-labelledby="story-title">
+        <div>
+          <h2 id="story-title">做过笔译，<br />也在做字幕。</h2>
+          <p class="story-author">Blaine · subtitle-me 作者</p>
+        </div>
+        <div class="story-copy">
+          <p>我本科学英语，做过涉外商务笔译，也用过 memoQ 这样的翻译工具。动笔前先整理术语，同一个名字前后用同一种译法，是我从翻译工作里带来的习惯。</p>
+          <p>最近，我在给《失落星船：马拉松》（Marathon）的英文视频做民间汉化，翻译开发者访谈和玩家教学，希望国内的同好也能看懂。游戏里的专有名词和黑话，经常被 AI 翻得前后不一。有时一句中文长达四十多个字，横在我那台 27 寸显示器上，读字幕都快顾不上看画面。</p>
+          <p>只要求它把句子写短，又可能丢掉台词里的修饰和幽默。我把翻译前确认术语的做法放进 Agent，保留一份对照原文的译稿，再单独处理字幕的断句和阅读长度。翻译之后，让 AI 回看原意，脚本检查时间轴、术语和行宽。</p>
+          <p>这套给自己处理字幕的流程，后来整理成了 subtitle-me。现在把它开源，也让有类似需要的人用得上。</p>
+          <div class="story-links">
+            <a href="https://heyblaine.com/projects/subtitle-me">读完整项目故事 ↗</a>
+            <a href="https://heyblaine.com/about">关于我 ↗</a>
+          </div>
+        </div>
       </section>
       <section class="install split wrap" id="install">
         <div>
