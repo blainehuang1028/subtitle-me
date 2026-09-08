@@ -21,4 +21,4 @@ Two replacement concepts were generated with built-in ImageGen: an editorial bla
 
 Concepts are retained with local QA evidence for reference only and are not served as page content or included in the distributable skill. They were generated with the built-in ImageGen tool, not the API fallback.
 
-The author's story is a reading section before installation, sourced from https://heyblaine.com/projects/subtitle-me and https://heyblaine.com/about. Keep the English degree, business translation, memoQ and Marathon subtitle experience factual; do not invent employers, years, metrics or guarantees. Preserve the incumbent palette and typography when simplifying the page.
+The author's story is a reading section before installation, sourced from https://heyblaine.com/projects/subtitle-me and https://heyblaine.com/about. Keep the English degree, business translation, memoQ and personal subtitle experience factual; do not invent employers, years, metrics or guarantees. Preserve the incumbent palette and typography when simplifying the page.

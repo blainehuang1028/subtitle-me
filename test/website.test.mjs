@@ -70,7 +70,7 @@ test("product story retains personal source links and a navigable section", asyn
   }
   assert.match(html, /涉外商务笔译/);
   assert.match(html, /memoQ/);
-  assert.match(html, /Marathon/);
+  assert.match(html, /翻译开发者访谈和玩家教学/);
   assert.doesNotMatch(html, /class="leader"/);
 });
 
