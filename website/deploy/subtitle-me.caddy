@@ -1,0 +1,18 @@
+# Merge these routes into the existing skills.heyblaine.com site block.
+# Do not replace the domain block or any sibling site's routes.
+redir /subtitle-me /subtitle-me/ 308
+redir /subtitle-me/index.html /subtitle-me/ 308
+handle_path /subtitle-me/* {
+    root * /srv/skills/subtitle-me/current
+    @assets path /assets/* /style.css /app.js
+    header @assets Cache-Control "public, max-age=3600"
+    file_server
+}
+handle /robots.txt {
+    root * /srv/skills/shared
+    file_server
+}
+handle /sitemap.xml {
+    root * /srv/skills/shared
+    file_server
+}

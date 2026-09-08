@@ -37,6 +37,30 @@ test("website local resources and glossary examples exist", async () => {
   assert.ok(html.includes("新项目从空白术语库开始"));
 });
 
+test("production SEO uses one canonical URL and valid source-backed structured data", async () => {
+  const html = await read("website/index.html");
+  const canonical = "https://skills.heyblaine.com/subtitle-me/";
+  assert.ok(html.includes(`<link rel="canonical" href="${canonical}"`));
+  assert.ok(html.includes(`<meta property="og:url" content="${canonical}"`));
+  assert.match(html, /<title>[^<]*字幕翻译 Skill[^<]*<\/title>/);
+  assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
+  assert.doesNotMatch(html, /noindex|localhost|127\.0\.0\.1/);
+  const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(schema["@graph"].length, 2);
+  for (const entity of schema["@graph"]) assert.equal(entity.url, canonical);
+  assert.equal(schema["@graph"][1].codeRepository, "https://github.com/blainehuang1028/subtitle-me");
+  assert.doesNotMatch(JSON.stringify(schema), /aggregateRating|reviewCount/);
+  const sitemap = await read("website/sitemap.xml");
+  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]), [canonical]);
+  assert.match(await read("website/deploy/robots.txt"), /Sitemap: https:\/\/skills\.heyblaine\.com\/sitemap\.xml/);
+  assert.ok((await read("website/deploy/sitemap.xml")).includes(`${canonical}sitemap.xml`));
+  const image = await readFile(new URL("website/assets/social-preview.png", root));
+  assert.deepEqual(image, await readFile(new URL("docs/images/social-preview.png", root)));
+  assert.equal(image.subarray(1, 4).toString(), "PNG");
+  assert.equal(image.readUInt32BE(16), 1280);
+  assert.equal(image.readUInt32BE(20), 640);
+});
+
 async function clipboardFixture(clipboard) {
   let handler;
   let selected = false;
