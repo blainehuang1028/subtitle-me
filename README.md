@@ -17,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="https://skills.heyblaine.com/subtitle-me/">官网</a> ·
   <a href="#安装">安装</a> ·
   <a href="#使用">使用</a> ·
   <a href="#它会做什么">功能</a> ·
