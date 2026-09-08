@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  把带时间轴的英文字幕交给你的 Agent，拿回自然、统一、适合观看的简体中文字幕。
+  译名有谱，字幕有据。为你的 Agent 装上字幕翻译 Skill，项目术语库统一译名，AI 对照原文再审一遍。
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@
 ## 安装
 
 ```bash
-npx skills@1.5.18 add blainehuang1028/subtitle-me
+npx skills@latest add blainehuang1028/subtitle-me
 ```
 
 需要 Node.js 20 或更高版本。
@@ -105,7 +105,7 @@ Subtitle Me turns timed English captions into reviewed Simplified Chinese subtit
 ### Install
 
 ```bash
-npx skills@1.5.18 add blainehuang1028/subtitle-me
+npx skills@latest add blainehuang1028/subtitle-me
 ```
 
 Node.js 20 or newer is required.

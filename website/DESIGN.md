@@ -1,0 +1,22 @@
+# Website design
+
+The user delegated design, then rejected the teal editor concept: it implied an online workstation and obscured the product's project glossary and AI review. The replacement is an editorial subtitle-proofreading page, with no playback, timeline, uploader or simulated app controls.
+
+## Visual specification
+
+- True white canvas, ink `#151515`, gray `#686868`, hairlines `#cecece`, pale yellow proofreading highlights `#ffe79a`.
+- System Chinese sans-serif; Impact for the wordmark, Avenir Next Condensed / Arial Narrow for English specimens, monospace for installation commands.
+- Desktop container 1320px with 48px outer gutters, 24px on mobile.
+- Hero 88px maximum / 46-60px on small phones; section headings 40px / 29px; body 16px / 14px; annotations around 12px.
+- Composition: left headline and install action; right unboxed annotated translation; open glossary table; AI proofreading example; ruled installation section; output definitions and scope notes.
+- Mobile stacks sections without a workspace-like frame. All copy remains selectable HTML. The only scripted interaction copies the installation command, with an accessible failure fallback.
+- Motifs: yellow text highlights, thin term leader line, black install button, inline corrected number. Arrows are text glyphs, with no decorative icon system.
+- Above-fold copy lock: subtitle-me; 术语库; AI 核验; 安装; GitHub; 译名有谱，字幕有据。; 为你的 Agent 装上字幕翻译 Skill。; 项目术语库统一译名，AI 对照原文再审一遍。; 安装 subtitle-me; the latest install command; the source/translation/term specimen.
+
+## Source and intentional refinements
+
+The glossary and first subtitle specimen come from `examples/demo`. The numeric correction is explicitly a review illustration, not a fabricated live QA result. New projects start with an empty glossary. AI review is a second phase and need not use a separate model. Do not imply perfect accuracy or private/offline model execution.
+
+Two replacement concepts were generated with built-in ImageGen: an editorial black/white/yellow hero and glossary with the exact above-fold copy; a matching AI review, install and deliverables section. The second concept rendered serif type, which is intentionally normalized to the primary concept's sans-serif system. Existing portable skill branding is unchanged; the website uses a neutral letter favicon.
+
+Concepts are retained with local QA evidence for reference only and are not served as page content or included in the distributable skill. They were generated with the built-in ImageGen tool, not the API fallback.

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>subtitle-me · 译名有谱，字幕有据。</title>
+    <meta
+      name="description"
+      content="为你的 Agent 装上字幕翻译 Skill。项目术语库统一译名，AI 对照原文再审一遍，把带时间轴的英文字幕翻成简体中文。"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="subtitle-me · 译名有谱，字幕有据。" />
+    <meta
+      property="og:description"
+      content="项目术语库统一译名，AI 对照原文再审一遍。装进 Agent 的字幕翻译 Skill。"
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/blainehuang1028/subtitle-me/main/docs/images/social-preview.png"
+    />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="header wrap">
+      <a class="brand" href="#" aria-label="subtitle-me 首页">subtitle-me</a>
+      <nav aria-label="主导航">
+        <a href="#glossary">术语库</a><a href="#review">AI 核验</a
+        ><a href="#install">安装</a
+        ><a href="https://github.com/blainehuang1028/subtitle-me"
+          >GitHub <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="headline">
+        <div class="hero-copy">
+          <h1 id="headline">
+            译名有<mark>谱</mark>，<br />字幕有<mark>据</mark>。
+          </h1>
+          <p class="lead">为你的 Agent 装上字幕翻译 Skill。</p>
+          <p class="intro">
+            项目术语库统一译名，<br class="mobile-break" />AI 对照原文再审一遍。
+          </p>
+          <div class="actions">
+            <a class="primary" href="#install"
+              >安装 subtitle-me <span aria-hidden="true">→</span></a
+            ><a
+              class="text-link"
+              href="https://github.com/blainehuang1028/subtitle-me"
+              >GitHub ↗</a
+            >
+          </div>
+          <code class="hero-command"
+            >npx skills@latest add blainehuang1028/subtitle-me</code
+          >
+        </div>
+        <figure class="specimen" aria-label="仓库示例中的字幕与术语对应关系">
+          <div class="original">
+            <span class="annotation">英文原句</span>
+            <p>
+              Today we’re testing <span class="underlined">Focus Mode.</span>
+            </p>
+          </div>
+          <p class="translation">今天测试<mark>专注模式</mark>。</p>
+          <div class="term-note">
+            <span class="leader" aria-hidden="true"></span>
+            <p>
+              <span lang="en">Focus Mode</span>
+              <span aria-hidden="true">→</span> 专注模式
+            </p>
+            <span class="annotation">项目已确认术语</span>
+          </div>
+          <figcaption>
+            <span>AI 对照复核</span><span>原意 / 术语 / 数字 / 漏译</span
+            ><small>审校示意</small>
+          </figcaption>
+        </figure>
+      </section>
+      <section class="glossary split wrap" id="glossary">
+        <div>
+          <h2>同一个名字，<br />从头到尾一致。</h2>
+          <p class="section-intro">
+            每个项目单独建库。<br />确认的译法留在项目里，下次接着用。
+          </p>
+        </div>
+        <div class="glossary-example">
+          <table>
+            <caption class="sr-only">
+              仓库示例的项目术语库
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">原词</th>
+                <th scope="col">译名</th>
+                <th scope="col">范围</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td lang="en">Northwind Lab</td>
+                <td><mark>北风实验室</mark></td>
+                <td>项目</td>
+              </tr>
+              <tr>
+                <td lang="en">Focus Mode</td>
+                <td><mark>专注模式</mark></td>
+                <td>项目</td>
+              </tr>
+              <tr>
+                <td lang="en">Delta Board</td>
+                <td><mark>Delta看板</mark></td>
+                <td>项目</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="caption">仓库示例；新项目从空白术语库开始。</p>
+          <a
+            class="small-link"
+            href="https://github.com/blainehuang1028/subtitle-me/tree/main/examples/demo"
+            >查看示例文件 ↗</a
+          >
+        </div>
+      </section>
+      <section class="review split wrap" id="review">
+        <div>
+          <h2>AI 再看一遍，<br />细节逐项核验。</h2>
+          <p class="section-intro">
+            翻译完成后，重新对照中英字幕。<br />原意、术语、数字与漏译，都要过一遍。
+          </p>
+          <p class="review-note">
+            AI 审校看语义，规则 QA 查格式、时间轴和术语落地。审校可以由同一个
+            Agent 分阶段完成。
+          </p>
+        </div>
+        <figure class="proof">
+          <figcaption class="annotation">核验示意</figcaption>
+          <p class="proof-source" lang="en">
+            It hides alerts for <span class="underlined">25</span> minutes.
+          </p>
+          <p
+            class="proof-translation"
+            aria-label="它会屏蔽提醒，错误数字 20 修正为 25 分钟"
+          >
+            它会屏蔽提醒 <del>20</del> <ins><mark>25</mark></ins> 分钟。
+          </p>
+          <p class="proof-note">数字跟原文，不能凭印象。</p>
+          <div class="review-rule">
+            <strong>问题先修，警告说清。</strong>
+            <p>
+              AI 核验并非零错误保证。检查记录与未消除的警告，会随字幕一起交付。
+            </p>
+          </div>
+        </figure>
+      </section>
+      <section class="install split wrap" id="install">
+        <div>
+          <h2>一行安装，<br />字幕开场。</h2>
+        </div>
+        <div class="install-content">
+          <div class="command-row">
+            <code id="command"
+              >npx skills@latest add blainehuang1028/subtitle-me</code
+            ><button id="copy" class="primary">复制命令</button>
+          </div>
+          <p id="copy-status" class="copy-status" role="status"></p>
+          <p class="install-help">
+            需要 Node.js 20+。在终端安装，再交给你的 Agent。
+          </p>
+          <p class="prompt-label">附上带时间轴的英文字幕，然后说：</p>
+          <blockquote>
+            用 subtitle-me 把 captions.en.srt 翻译成简体中文。
+          </blockquote>
+          <div class="install-links">
+            <a href="https://github.com/blainehuang1028/subtitle-me#使用"
+              >查看完整文档 ↗</a
+            ><a
+              href="https://github.com/blainehuang1028/subtitle-me/releases/latest"
+              >WorkBuddy ZIP ↗</a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="details wrap" aria-label="输入与交付范围">
+        <dl class="outputs">
+          <div>
+            <dt>支持输入</dt>
+            <dd>SRT / WebVTT / YouTube JSON3 / ASS 对白</dd>
+          </div>
+          <div>
+            <dt>默认交付</dt>
+            <dd>中文 SRT / 项目术语库 / QA 报告</dd>
+          </div>
+          <div>
+            <dt>按需生成</dt>
+            <dd>双语 ASS / 中文标题</dd>
+          </div>
+        </dl>
+        <div class="footnotes">
+          <p>
+            目前只做英文到简体中文。不识别语音，不下载、烧录、配音或上传视频。
+          </p>
+          <p>
+            Codex 已验证安装与完整示例。Hermes
+            Agent、OpenCode、Pi、OpenClaw、Trae 兼容通用 Skill
+            结构，尚未逐一实测。
+          </p>
+          <p>
+            本站不提供在线翻译。实际翻译在你的 Agent
+            环境中完成，数据处理取决于所用服务。生成 ASS 不需要
+            FFmpeg，渲染预览时才需要。
+          </p>
+        </div>
+        <noscript
+          ><p>
+            可手动复制上方安装命令。自动复制需要启用 JavaScript。
+          </p></noscript
+        >
+      </section>
+    </main>
+    <footer class="footer wrap">
+      <a class="brand" href="#">subtitle-me</a><span>MIT · Kai Huang</span
+      ><a href="https://github.com/blainehuang1028/subtitle-me">GitHub ↗</a>
+    </footer>
+  </body>
+</html>

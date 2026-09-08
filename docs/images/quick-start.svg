@@ -1,29 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
   <title id="title">Subtitle Me quick start</title>
-  <desc id="desc">A terminal-style view of installing Subtitle Me and creating a subtitle job.</desc>
-  <rect width="1280" height="720" rx="30" fill="#0E1320"/>
-  <rect width="1280" height="72" rx="30" fill="#182135"/>
-  <rect y="45" width="1280" height="27" fill="#182135"/>
-  <circle cx="42" cy="36" r="10" fill="#FF6B6B"/>
-  <circle cx="74" cy="36" r="10" fill="#FFCF66"/>
-  <circle cx="106" cy="36" r="10" fill="#65D49A"/>
-  <text x="640" y="44" fill="#AEB8D0" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">subtitle-me · quick start</text>
+  <desc id="desc">Illustration of installing Subtitle Me and starting a subtitle task in an Agent.</desc>
+  <rect width="1280" height="720" rx="30" fill="#FFFFFF"/>
+  <rect width="1280" height="72" rx="30" fill="#F2F2F2"/>
+  <rect y="45" width="1280" height="27" fill="#F2F2F2"/>
+  <circle cx="42" cy="36" r="10" fill="#888888"/>
+  <circle cx="74" cy="36" r="10" fill="#151515"/>
+  <circle cx="106" cy="36" r="10" fill="#151515"/>
+  <text x="640" y="44" fill="#686868" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">subtitle-me · 安装与使用示意</text>
   <g font-family="SFMono-Regular, Consolas, monospace" font-size="25">
-    <text x="50" y="126" fill="#65D49A">$</text>
-    <text x="82" y="126" fill="#EEF3FF">npx skills@1.5.18 add blainehuang1028/subtitle-me</text>
-    <text x="50" y="180" fill="#72809E"># Attach captions.en.srt, then tell your Agent:</text>
-    <text x="50" y="230" fill="#FFCF66">帮我翻译这个视频</text>
-    <text x="50" y="304" fill="#6E8BFF">Subtitle Me job created</text>
-    <text x="50" y="350" fill="#AEB8D0">job:</text>
-    <text x="138" y="350" fill="#EEF3FF">&lt;project&gt;/subtitle-localizer/jobs/captions-en</text>
-    <text x="50" y="396" fill="#AEB8D0">source cues:</text>
-    <text x="238" y="396" fill="#EEF3FF">20</text>
-    <text x="50" y="442" fill="#AEB8D0">source format:</text>
-    <text x="292" y="442" fill="#EEF3FF">srt</text>
-    <text x="50" y="488" fill="#AEB8D0">bilingual ASS:</text>
-    <text x="292" y="488" fill="#EEF3FF">yes</text>
-    <text x="50" y="534" fill="#AEB8D0">Chinese title:</text>
-    <text x="292" y="534" fill="#EEF3FF">yes</text>
-    <text x="50" y="606" fill="#65D49A">All job files stay visible inside subtitle-localizer/</text>
+    <text x="50" y="126" fill="#151515">$</text>
+    <text x="82" y="126" fill="#151515">npx skills@latest add blainehuang1028/subtitle-me</text>
+    <text x="50" y="180" fill="#686868"># Attach captions.en.srt, then tell your Agent:</text>
+    <text x="50" y="230" fill="#151515">帮我翻译这个视频</text>
+    <text x="50" y="304" fill="#151515">Subtitle Me job created</text>
+    <text x="50" y="350" fill="#686868">job:</text>
+    <text x="138" y="350" fill="#151515">&lt;project&gt;/subtitle-localizer/jobs/captions-en</text>
+    <text x="50" y="396" fill="#686868">source cues:</text>
+    <text x="238" y="396" fill="#151515">20</text>
+    <text x="50" y="442" fill="#686868">source format:</text>
+    <text x="292" y="442" fill="#151515">srt</text>
+    <text x="50" y="488" fill="#686868">bilingual ASS:</text>
+    <text x="292" y="488" fill="#151515">yes</text>
+    <text x="50" y="534" fill="#686868">Chinese title:</text>
+    <text x="292" y="534" fill="#151515">yes</text>
+    <text x="50" y="606" fill="#151515">All job files stay visible inside subtitle-localizer/</text>
   </g>
 </svg>
