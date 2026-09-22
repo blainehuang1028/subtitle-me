@@ -226,7 +226,7 @@ h1 mark {
   font-size: 12px;
 }
 .specimen figcaption small {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
 }
 .split {
@@ -313,7 +313,7 @@ th:last-child {
   white-space: nowrap;
 }
 .proof-translation del {
-  color: #aaa;
+  color: var(--muted);
 }
 .proof-translation ins {
   text-decoration: none;
@@ -713,11 +713,11 @@ dd {
     font-size: 23px;
   }
   .specimen figcaption {
-    font-size: 10px;
+    font-size: 11px;
     gap: 10px;
   }
   .specimen figcaption small {
-    font-size: 9px;
+    font-size: 11px;
   }
   h2 {
     font-size: 29px;
@@ -781,3 +781,38 @@ dd {
 .original .underlined {
   white-space: nowrap;
 }
+
+.release-block, .comparisons, .changelog { padding-block: 64px; }
+.release-heading, .comparison-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 36px; }
+.release-heading > p, .comparison-heading > p { font-size: 14px; line-height: 1.9; color: var(--muted); }
+.release-heading a { text-decoration: underline; text-underline-offset: 5px; }
+.feature-list { margin: 0; }
+.feature-list > div { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; padding-block: 24px; border-top: 1px solid var(--line); }
+.feature-list dt { font-size: 23px; margin: 0; }
+.feature-list dd { font-size: 16px; max-width: 65ch; }
+.comparison-case { padding-block: 34px; border-top: 1px solid var(--line); }
+.comparison-case header h3, .changelog h3 { font-size: 25px; font-weight: 600; margin: 0 0 12px; }
+.comparison-case header > p { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.comparison-case header > p[lang] { font-size: 23px; color: var(--ink); margin-block: 20px 30px; }
+.translation-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.translation-pair span { font-size: 12px; color: var(--muted); }
+.translation-pair p { font-size: clamp(23px, 2.4vw, 32px); line-height: 1.65; margin: 14px 0 24px; }
+.case-reason, .comparison-disclosure, .migration-note { font-size: 14px; line-height: 1.9; max-width: 75ch; color: var(--muted); }
+.case-source, .example-links a { font-size: 13px; text-decoration: underline; text-underline-offset: 5px; }
+.exception-case { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+.kept-translation { font-size: 25px; line-height: 1.6; margin-top: 0; }
+.example-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+.changelog ul { padding-left: 20px; line-height: 2; font-size: 15px; }
+@media(max-width:800px) {
+  .release-block, .comparisons, .changelog { padding-block: 40px; }
+  .release-heading, .comparison-heading { display: block; margin-bottom: 24px; }
+  .feature-list > div, .exception-case { grid-template-columns: 1fr; gap: 16px; }
+  .feature-list dt { font-size: 21px; }
+  .feature-list dd { font-size: 14px; }
+  .translation-pair { grid-template-columns: 1fr; gap: 4px; }
+  .comparison-case header h3, .changelog h3 { font-size: 23px; }
+  .comparison-case header > p[lang] { font-size: 20px; }
+  .header nav { gap: 16px; }
+  .header nav .story-nav, .header nav a[href="#review"] { display: none; }
+}
+@media(max-width:450px) { .header nav { gap: 12px; font-size: 12px; } }

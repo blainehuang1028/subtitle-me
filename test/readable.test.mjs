@@ -14,12 +14,13 @@ test('splits long Chinese only inside the source cue span', () => {
   assert.equal(result.readableZh.map((cue) => cue.text).join(''), zh[0].text);
 });
 
-test('allows a deliberate two-line exception only without bilingual ASS', () => {
+test('normalizes semantic line breaks to one readable Chinese row', () => {
   const source = parseSrt('1\n00:00:00,000 --> 00:00:04,000\nOne indivisible thought.\n');
   const zh = parseSrt('1\n00:00:00,000 --> 00:00:04,000\n一个不可拆开的想法\n需要保留完整语义。\n');
   const result = createReadableLayers({ sourceCues: source, semanticZhCues: zh, bilingualAss: false });
-  assert.equal(result.warnings[0].code, 'two_line_exception');
-  assert.throws(() => createReadableLayers({ sourceCues: source, semanticZhCues: zh, bilingualAss: true }), /one Chinese row/);
+  assert.ok(result.readableZh.every(cue => !cue.text.includes('\n')));
+  const bilingual = createReadableLayers({ sourceCues: source, semanticZhCues: zh, bilingualAss: true });
+  assert.ok(bilingual.readableZh.every(cue => !cue.text.includes('\n')));
 });
 
 test('builds transparent-background bilingual ASS with two rows', () => {

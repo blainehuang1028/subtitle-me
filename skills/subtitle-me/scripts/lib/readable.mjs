@@ -310,18 +310,6 @@ export function createReadableLayers({
     if (source.text.length > 4000 || translated.text.length > 4000) {
       throw new UserError(`Cue ${index + 1} exceeds the readable-layout limit of 4,000 characters`);
     }
-    const explicitLines = translated.text.split('\n').map((line) => line.trim()).filter(Boolean);
-    if (explicitLines.length > 1) {
-      if (explicitLines.length > 2) throw new UserError(`Chinese cue ${index + 1} has more than two physical lines`);
-      if (bilingualAss) throw new UserError(`Chinese cue ${index + 1} uses a two-line exception; bilingual ASS permits one Chinese row only`);
-      if (explicitLines.some((line) => displayUnits(line) > maximumZhUnits)) {
-        throw new UserError(`Chinese cue ${index + 1} has a line over ${maximumZhUnits} display units`);
-      }
-      readableZh.push({ ...translated, index: readableZh.length + 1 });
-      readableEn.push({ ...source, text: normalizeSubtitleText(source.text), index: readableEn.length + 1 });
-      warnings.push({ code: 'two_line_exception', cue: index + 1, message: 'Review the explicit two-line Chinese exception in context.' });
-      continue;
-    }
     const zhText = normalizeSubtitleText(translated.text);
     const enText = normalizeSubtitleText(source.text);
     const zhCount = Math.max(1, Math.ceil(displayUnits(zhText) / maximumZhUnits));
@@ -331,7 +319,7 @@ export function createReadableLayers({
     const protectedSourceTerms = count === 1 ? [] : relevantSourceTerms(sourceTermLookup, enText);
     const zhChunks = partitionChinese(zhText, count, protectedTargetTerms, maximumZhUnits);
     if (!zhChunks) {
-      throw new UserError(`Chinese cue ${index + 1} cannot be split at a safe semantic boundary. Rewrite it or add an explicit two-line exception when ASS is not requested.`);
+      throw new UserError(`Chinese cue ${index + 1} cannot be split at a safe semantic boundary. Rewrite redundant phrasing without losing meaning.`);
     }
     let enChunks = count === 1 ? [enText] : partitionEnglish(enText, count, protectedSourceTerms, maximumEnglishCharacters);
     if (!enChunks) {

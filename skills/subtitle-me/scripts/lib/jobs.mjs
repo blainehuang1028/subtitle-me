@@ -30,6 +30,7 @@ const JOB_ARTIFACT_LAYOUT = {
   qa: 'qa/qa.json',
   report: 'report.md',
   title: 'title.zh-Hans.md',
+  description: 'description.zh-Hans.md',
   preview: 'preview.png',
 };
 
@@ -145,7 +146,7 @@ async function chooseJobId(stateRoot, requestedId, inputPath, normalized) {
   }
 }
 
-export async function initializeJob({ projectRoot, inputPath, requestedId, bilingualAss, chineseTitle }) {
+export async function initializeJob({ projectRoot, inputPath, requestedId, bilingualAss, chineseTitle, videoDescription }) {
   const project = await canonicalDirectory(projectRoot, 'Project directory');
   const source = resolve(inputPath);
   if (!(await pathExists(source))) throw new UserError(`Subtitle file not found: ${source}`);
@@ -176,10 +177,12 @@ export async function initializeJob({ projectRoot, inputPath, requestedId, bilin
   const sourceChanged = Boolean(existing && existingNormalized !== normalized);
   const refreshIncomplete = existing?.phases?.normalized?.status === 'refreshing';
   const effectiveBilingualAss = bilingualAss ?? existing?.options?.bilingualAss ?? false;
+  const effectiveDescription = videoDescription ?? existing?.options?.videoDescription ?? false;
   const effectiveChineseTitle = chineseTitle ?? existing?.options?.chineseTitle ?? false;
   const optionsChanged = Boolean(existing && (
     existing.options?.bilingualAss !== effectiveBilingualAss
     || existing.options?.chineseTitle !== effectiveChineseTitle
+    || Boolean(existing.options?.videoDescription) !== effectiveDescription
   ));
   const now = utcNow();
 
@@ -201,7 +204,7 @@ export async function initializeJob({ projectRoot, inputPath, requestedId, bilin
     updatedAt: now,
     sourceLanguage: 'en',
     targetLanguage: 'zh-Hans',
-    options: { bilingualAss: effectiveBilingualAss, chineseTitle: effectiveChineseTitle },
+    options: { bilingualAss: effectiveBilingualAss, chineseTitle: effectiveChineseTitle, videoDescription: effectiveDescription, subtitleLanguage: existing?.options?.subtitleLanguage ?? 'bilingual' },
     source: {
       originalPath: source,
       format: parsed.format,
@@ -243,6 +246,10 @@ export async function initializeJob({ projectRoot, inputPath, requestedId, bilin
     await atomicWrite(titlePath, 'Original: \nChinese: \n');
   } else if (effectiveChineseTitle && (!existing || !(await pathExists(titlePath)))) {
     await atomicWrite(titlePath, 'Original: \nChinese: \n');
+  }
+  const descriptionPath = jobArtifactPaths(jobPath).description;
+  if (effectiveDescription && (!(await pathExists(descriptionPath)) || sourceChanged || refreshIncomplete)) {
+    await atomicWrite(descriptionPath, '# 视频简介\n\n来源：\n作者：\n\n');
   }
   await saveJob(jobPath, job);
   return {
@@ -289,6 +296,7 @@ export async function invalidateAiReview({ jobPath, job, cueCount = job.source?.
         status: current.status,
         reviewedAt: current.reviewedAt,
         coverage: current.coverage,
+        batches: current.batches,
         issues: current.issues,
         notes: current.notes,
         invalidatedAt: utcNow(),

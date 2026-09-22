@@ -1,6 +1,6 @@
 {
   "name": "subtitle-me-skill",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Agent Skill for English to Simplified Chinese subtitle localization",
   "type": "module",

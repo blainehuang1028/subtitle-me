@@ -10,7 +10,7 @@ Generate ASS after readable subtitles exist:
 node "$SKILL_ROOT/scripts/subtitle-me.mjs" ass build --job "$JOB_DIR"
 ```
 
-The v0.1.0 style uses:
+The default bilingual style uses:
 
 - one white Chinese row;
 - one smaller white English row;
@@ -43,3 +43,5 @@ node "$SKILL_ROOT/scripts/subtitle-me.mjs" ass preview \
 ```
 
 Without `--video`, the command renders the subtitle over a neutral dark background. Preview does not burn subtitles into a delivery video.
+
+For explicit single-language output, add `--language zh` or `--language en` to `ass build`. English-only uses the smaller English font size to preserve its line-width budget. The legacy ASS filename is unchanged. Regenerate older ASS files once when upgrading, since the header now records the language mode.

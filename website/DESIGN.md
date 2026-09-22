@@ -22,3 +22,7 @@ Two replacement concepts were generated with built-in ImageGen: an editorial bla
 Concepts are retained with local QA evidence for reference only and are not served as page content or included in the distributable skill. They were generated with the built-in ImageGen tool, not the API fallback.
 
 The author's story is a reading section before installation, sourced from https://heyblaine.com/projects/subtitle-me and https://heyblaine.com/about. Keep the English degree, business translation, memoQ and personal subtitle experience factual; do not invent employers, years, metrics or guarantees. Preserve the incumbent palette and typography when simplifying the page.
+
+## Version 0.2.0 extension
+
+Preserve the incumbent editorial system. Add open feature rows, paired translation examples, an explicit exception, and an in-page changelog. Historical translations and newly edited examples have distinct labels; illustrative sentences are never attributed to an untested model or skill. Link the creator's supplied public profile for actual work without implying every video used the current public package.

@@ -21,7 +21,7 @@ Readable segmentation may split only within one source cue. It must preserve the
 
 ## Chinese readability
 
-The readable Chinese layer strongly prefers one physical line per cue.
+The readable Chinese layer requires exactly one physical line per cue.
 
 - Target 16 display units.
 - Hard maximum 24 display units per physical line.
@@ -30,10 +30,8 @@ The readable Chinese layer strongly prefers one physical line per cue.
 - Prefer punctuation or a natural phrase boundary.
 - Never cut inside an approved term, name, Latin word, or number-plus-unit expression.
 
-If a single line would break meaning or create unreasonable reading pressure, the semantic translation may contain an intentional two-line exception. Both lines must fit the hard limit, and QA will expose the exception as a warning. Do not create more than two Chinese lines.
-
-Bilingual ASS is stricter: it permits one Chinese row and one smaller English row. A Chinese two-line exception therefore blocks ASS generation. Rewrite or split the cue naturally instead of producing a three-row block.
+Semantic masters may contain formatting line breaks. Readable output normalizes them and splits at safe boundaries if necessary. Never use a second Chinese display row to fix overflow. Default ASS has one Chinese row plus one smaller English row; explicit single-language ASS has one row. Splitting does not create extra reading time, so retain reading-speed warnings and inspect them in context.
 
 ## Reading warnings
 
-Deterministic QA warns when a Chinese cue is shorter than 5/6 second, exceeds 9 display units per second, exceeds the 16-unit target, or uses a two-line exception. Review warnings in adjacent context. Do not hide them by weakening the limits.
+Deterministic QA warns when a Chinese cue is shorter than 5/6 second, exceeds 9 display units per second, exceeds the 16-unit target. Review warnings in adjacent context. Do not hide them by weakening the limits.

@@ -32,6 +32,7 @@ subtitle-localizer/
     qa/ai-review.json
     qa/qa.json
     title.zh-Hans.md                    optional
+    description.zh-Hans.md              optional
     report.md
 ```
 
@@ -80,16 +81,18 @@ Original: <original title>
 Chinese: <natural Simplified Chinese title>
 ```
 
-Keep it to one title pair. Do not add descriptions, tags, chapters, or upload copy.
+Keep it to one title pair. For a requested video description, initialize with `--description yes` and write a summary, `来源：<original URL>` and `作者：<creator>` in `description.zh-Hans.md`. Final QA requires all three. Tags, chapters and uploading remain out of scope.
 
 ## Resuming and rerunning
 
-`job.json` records the original subtitle path, source format, options, and phase states. It deliberately does not maintain file hashes or hidden freshness rules.
+`job.json` records the original subtitle path, source format, options, and phase states. It does not hash media. New AI review scaffolds keep visible per-batch text snapshots to identify changed ranges.
 
 - Run `status` to see the last completed phase.
 - Run `init` again if the input subtitle changed. A source text change resets downstream phases and keeps the preceding terminology records and AI-review summary inside the reset JSON files for reference.
-- After changing the semantic translation, regenerate readable output, repeat the second review, rebuild optional ASS, and run QA.
-- After changing terminology, regenerate readable output if the chosen wording changed, then repeat the second review, rebuild optional ASS when needed, and run QA.
+- After changing the semantic translation, regenerate readable output, scaffold and review changed ranges with context, rebuild optional ASS, and run QA.
+- After changing terminology, regenerate readable output if the chosen wording changed, then scaffold and review changed ranges with context, rebuild optional ASS when needed, and run QA.
 - After changing readable subtitles, ASS, or title files, rebuild any dependent artifact and rerun QA.
 
 Existing files stay visible for inspection. The phase state is guidance, while the latest QA run is the delivery check.
+
+ASS defaults to two rows. Explicit single-language requests use `ass build --job "$JOB_DIR" --language zh` or `--language en`; final QA validates the selected mode. Keep both masters internally, but deliver only the requested language.

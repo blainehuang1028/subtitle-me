@@ -63,7 +63,7 @@
       }
     </script>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./style.css?v=story-20260908" />
+    <link rel="stylesheet" href="./style.css?v=020-20260922" />
     <script type="module" src="./app.js"></script>
   </head>
   <body>
@@ -71,8 +71,8 @@
     <header class="header wrap">
       <a class="brand" href="#" aria-label="subtitle-me 首页">subtitle-me</a>
       <nav aria-label="主导航">
-        <a href="#story" class="story-nav">产品故事</a>
-        <a href="#glossary">术语库</a><a href="#review">AI 核验</a
+        <a href="#examples">翻译对照</a><a href="#changelog">更新</a>
+        <a href="#story" class="story-nav">产品故事</a><a href="#review">AI 核验</a
         ><a href="#install">安装</a
         ><a href="https://github.com/blainehuang1028/subtitle-me"
           >GitHub <span aria-hidden="true">↗</span></a
@@ -122,6 +122,34 @@
             ><small>审校示意</small>
           </figcaption>
         </figure>
+      </section>
+      <section class="release-block wrap" id="features" aria-labelledby="feature-title">
+        <div class="release-heading"><h2 id="feature-title">把做字幕的经验，<br />写进每一次翻译。</h2><p>v0.2.0 · 2026.09.22<br /><a href="#changelog">查看这次更新 ↓</a></p></div>
+        <dl class="feature-list">
+          <div><dt>中文顺口，原意不走样。</dt><dd>少一点机械句式，保留原话的条件、语气和分寸。梗可以换，人物台词与前后呼应要留下。</dd></div>
+          <div><dt>中文一行，英文一行。</dt><dd>默认中英双语，按需只留中文或英文。阅读速度与断句一起看，拆成两条不会多出阅读时间。</dd></div>
+          <div><dt>改过哪里，就回看哪里。</dt><dd>复用未变且通过的审核范围，改动连同相邻字幕重新复核。视频标题和简介另行检查，简介保留来源与作者。</dd></div>
+        </dl>
+      </section>
+      <section class="comparisons wrap" id="examples" aria-labelledby="examples-title">
+        <div class="comparison-heading"><h2 id="examples-title">好字幕，差在这些地方。</h2><p>一句话怎么改，为什么改，什么时候不该改。</p></div>
+        <article class="comparison-case">
+          <header><h3>少加一层情绪。</h3><p>真实历史译文 · Bungie · 00:20.560 至 00:22.630</p><p lang="en">The consequences have been real.</p></header>
+          <div class="translation-pair"><div><span>历史译文</span><p>由此带来的后果也是切实而沉痛的。</p></div><div><span>本次按新版规则改写</span><p><mark>这些后果实实在在。</mark></p></div></div>
+          <p class="case-reason">“沉痛”加重了原句语气。删掉额外判断，让后文具体说明失去了什么。历史译文来自作者旧项目，改写为本次编辑示范。</p>
+          <a class="case-source" href="https://www.youtube.com/watch?v=asnrQ1UoBQM&amp;t=20">原视频：The Next Chapter for Bungie ↗</a>
+        </article>
+        <article class="comparison-case">
+          <header><h3>动作说直接一点。</h3><p>自拟教学案例 · 时间关系保持不变</p><p lang="en">Once you finish reloading, you can keep firing.</p></header>
+          <div class="translation-pair"><div><span>机械句式示意</span><p>当你完成换弹的时候，你就可以继续射击。</p></div><div><span>按规则改写</span><p><mark>换完弹就能继续开火。</mark></p></div></div>
+          <p class="case-reason">省去可推知的主语，把时间从句压短。“换完弹”这个条件仍然在。若原文刻意强调“你”，就不能随便删去。</p>
+        </article>
+        <article class="comparison-case exception-case">
+          <header><h3>该保留的对照，照样保留。</h3><p lang="en">It’s not a bug. It’s intentional.</p></header>
+          <div><p class="kept-translation">这不是 bug，是故意这样设计的。</p><p class="case-reason">原文在纠正误解，就保留这种对照。“不是……而是……”和“这意味着”都需要看上下文，不能当禁词删掉。</p></div>
+        </article>
+        <p class="comparison-disclosure">历史案例与教学示例均已标明来源。目前尚未进行跨模型或跨 Skill 的同素材测评。</p>
+        <div class="example-links"><a href="https://space.bilibili.com/1602220899">到我的 B 站主页看实际字幕作品 ↗</a><a href="https://github.com/blainehuang1028/subtitle-me/blob/main/docs/translation-examples.zh-CN.md">查看案例来源与规则边界 ↗</a></div>
       </section>
       <section class="glossary split wrap" id="glossary">
         <div>
@@ -215,6 +243,10 @@
           </div>
         </div>
       </section>
+      <section class="changelog split wrap" id="changelog" aria-labelledby="changelog-title">
+        <div><h2 id="changelog-title">更新记录</h2><p class="section-intro">v0.2.0 · 2026.09.22</p></div>
+        <div><h3>中文更自然，改稿少返工。</h3><ul><li>加入翻译前的背景梳理、自然中文规则和具体反例。</li><li>默认生成中英双语 ASS，明确要求时支持纯中文或纯英文。</li><li>修改后复核受影响范围及相邻上下文，保留未变的审核覆盖。</li><li>新增带来源与作者的视频简介，保留独立的视频标题。</li></ul><p class="migration-note">旧任务继续沿用已有输出选项。旧审核记录首次迁移时需要完整复核；可读中文字幕统一为单行。单语展示仍保留双语底稿供内部审核。</p><a class="case-source" href="https://github.com/blainehuang1028/subtitle-me/blob/main/CHANGELOG.md">完整 Changelog ↗</a></div>
+      </section>
       <section class="install split wrap" id="install">
         <div>
           <h2>一行安装，<br />字幕开场。</h2>
@@ -251,11 +283,11 @@
           </div>
           <div>
             <dt>默认交付</dt>
-            <dd>中文 SRT / 项目术语库 / QA 报告</dd>
+            <dd>中文 SRT / 双语 ASS / 术语库 / QA 报告</dd>
           </div>
           <div>
             <dt>按需生成</dt>
-            <dd>双语 ASS / 中文标题</dd>
+            <dd>单语 ASS / 视频标题 / 视频简介</dd>
           </div>
         </dl>
         <div class="footnotes">

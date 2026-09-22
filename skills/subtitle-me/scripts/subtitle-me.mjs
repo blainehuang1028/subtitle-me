@@ -55,7 +55,7 @@ function writeError(strings, ...values) {
   process.stderr.write(terminalTemplate(strings, values));
 }
 
-const HELP = `subtitle-me ${VERSION}\n\nTranslate timed English subtitles into reviewed Simplified Chinese.\n\nCommands:\n  doctor [--ass-preview]\n  init --input <captions.srt|vtt|json3|ass> [--project <dir>] [--job <id>] [--ass yes|no] [--title yes|no]\n  glossary lint [--project <dir>]\n  glossary apply --job <job-dir> [--only <English term>]\n  readable --job <job-dir>\n  review scaffold --job <job-dir>\n  ass build --job <job-dir> [--font <family>]\n  ass preview --job <job-dir> [--video <file>] [--at <seconds>] [--output <preview.png>]\n  qa --job <job-dir>\n  status --job <job-dir>\n\nThe visible project workspace is always <project>/subtitle-localizer/.`;
+const HELP = `subtitle-me ${VERSION}\n\nTranslate timed English subtitles into reviewed Simplified Chinese.\n\nCommands:\n  doctor [--ass-preview]\n  init --input <captions.srt|vtt|json3|ass> [--project <dir>] [--job <id>] [--ass yes|no] [--title yes|no] [--description yes|no]\n  glossary lint [--project <dir>]\n  glossary apply --job <job-dir> [--only <English term>]\n  readable --job <job-dir>\n  review scaffold --job <job-dir>\n  ass build --job <job-dir> [--font <family>] [--language bilingual|zh|en]\n  ass preview --job <job-dir> [--video <file>] [--at <seconds>] [--output <preview.png>]\n  qa --job <job-dir>\n  status --job <job-dir>\n\nThe visible project workspace is always <project>/subtitle-localizer/.`;
 
 function printHelp() {
   process.stdout.write(`${HELP}\n`);
@@ -105,12 +105,12 @@ async function invalidateTerminologyConsumers(jobs, reason) {
 
 const COMMAND_SCHEMAS = new Map([
   ['doctor', { values: [], booleans: ['ass-preview', 'help'] }],
-  ['init', { values: ['input', 'project', 'job'], booleans: ['ass', 'title', 'help'] }],
+  ['init', { values: ['input', 'project', 'job'], booleans: ['ass', 'title', 'description', 'help'] }],
   ['glossary lint', { values: ['project'], booleans: ['help'] }],
   ['glossary apply', { values: ['job', 'only'], booleans: ['help'] }],
   ['readable', { values: ['job'], booleans: ['help'] }],
   ['review scaffold', { values: ['job'], booleans: ['help'] }],
-  ['ass build', { values: ['job', 'font'], booleans: ['help'] }],
+  ['ass build', { values: ['job', 'font', 'language'], booleans: ['help'] }],
   ['ass preview', { values: ['job', 'video', 'at', 'output'], booleans: ['help'] }],
   ['qa', { values: ['job'], booleans: ['help'] }],
   ['status', { values: ['job'], booleans: ['help'] }],
@@ -158,6 +158,7 @@ async function commandInit(options) {
     inputPath,
     requestedId: options.job ? String(options.job) : undefined,
     bilingualAss: options.ass === undefined ? undefined : booleanOption(options, 'ass', false),
+    videoDescription: options.description === undefined ? undefined : booleanOption(options, 'description', false),
     chineseTitle: options.title === undefined ? undefined : booleanOption(options, 'title', false),
   });
   writeOutput`Subtitle Me job ${result.resumed ? 'resumed' : result.refreshed ? 'refreshed' : 'created'}\n`;
@@ -305,11 +306,13 @@ async function commandAss(positionals, options) {
       readUtf8(paths.readableEn),
     ]);
     const ass = buildBilingualAss({
+      language: String(options.language ?? job.options.subtitleLanguage ?? 'bilingual'),
       zhCues: parseSrt(readableZh),
       enCues: parseSrt(readableEn),
       fontName: String(options.font ?? 'Noto Sans CJK SC'),
     });
     await atomicWrite(paths.ass, ass);
+    job.options.subtitleLanguage = String(options.language ?? job.options.subtitleLanguage ?? 'bilingual');
     await saveJob(jobPath, {
       ...job,
       phases: {

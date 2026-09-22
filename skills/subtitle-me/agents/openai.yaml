@@ -4,4 +4,4 @@ interface:
   icon_small: "./assets/icon-small.svg"
   icon_large: "./assets/logo-light.svg"
   brand_color: "#5B7CFA"
-  default_prompt: "Use $subtitle-me to translate my timed English subtitles into Simplified Chinese."
+  default_prompt: "Use $subtitle-me to translate my timed English subtitles into natural Simplified Chinese, review fidelity, and create one Chinese row plus one English row."

@@ -32,7 +32,7 @@ const REQUIRED = [
 async function walk(path) {
   const result = [];
   for (const entry of await readdir(path, { withFileTypes: true })) {
-    if (['.git', 'dist', 'node_modules'].includes(entry.name)) continue;
+    if (['.git', '.qa', '.playwright-cli', 'dist', 'node_modules'].includes(entry.name)) continue;
     const child = join(path, entry.name);
     if (entry.isDirectory()) result.push(...await walk(child));
     else if (entry.isFile()) result.push(child);
@@ -63,7 +63,7 @@ async function main() {
     const name = relative(ROOT, path).replaceAll('\\', '/');
     if (unfinishedPattern.test(content)) errors.push(`${name} contains unfinished placeholder text`);
     if (/\/Users\/|[A-Z]:\\Users\\/.test(content)) errors.push(`${name} contains a machine-specific absolute path`);
-    if (excludedPattern.test(content)) errors.push(`${name} contains excluded project-specific material`);
+    if ((name.startsWith('skills/') || name.startsWith('examples/demo/')) && excludedPattern.test(content)) errors.push(`${name} contains excluded project-specific material`);
   }
 
   const packageDir = await mkdtemp(join(tmpdir(), 'subtitle-me-validate-'));

@@ -32,7 +32,7 @@ test('builds a WorkBuddy ZIP with injected metadata and an allowlisted skill tre
   const skill = entries.get('skills/subtitle-me/SKILL.md').toString('utf8');
   assert.match(skill, /description_zh:/);
   assert.match(skill, /description_en:/);
-  assert.match(skill, /version: "0\.1\.0"/);
+  assert.match(skill, /version: "0\.2\.0"/);
   assert.match(skill, /author: "Kai Huang"/);
   assert.equal(entries.has('skills/subtitle-me/manifest.json'), false);
   assert.equal([...entries.keys()].every((name) => name.startsWith('skills/subtitle-me/')), true);

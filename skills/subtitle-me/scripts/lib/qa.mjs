@@ -1,3 +1,4 @@
+import { reviewContext, reviewBatches, sameReviewInput } from './review-context.mjs';
 import { join } from 'node:path';
 import {
   atomicWrite,
@@ -121,7 +122,7 @@ function reviewCoverageIsComplete(coverage, cueCount) {
 export async function createAiReviewScaffold({ jobPath, glossaryPath }) {
   const paths = jobArtifactPaths(jobPath);
   const job = await readJson(join(jobPath, 'job.json'));
-  await invalidateAiReview({
+  const scaffold = await invalidateAiReview({
     jobPath,
     job,
     reason: 'AI review scaffold requested. Complete the new review before final QA.',
@@ -129,13 +130,19 @@ export async function createAiReviewScaffold({ jobPath, glossaryPath }) {
   for (const required of [paths.source, paths.semanticZh, paths.termCandidates, paths.termDecisions, glossaryPath]) {
     if (!(await pathExists(required))) throw new UserError(`Create ${required} before scaffolding AI review`);
   }
-  const sourceCues = parseSrt(await readUtf8(paths.source));
-  return invalidateAiReview({
-    jobPath,
-    job,
-    cueCount: sourceCues.length,
-    reason: 'AI review scaffold requested. Complete the new review before final QA.',
+  const previous = scaffold.previousReview;
+  const reusable = previous?.status === 'passed' && previous.reviewedAt && !Number.isNaN(Date.parse(previous.reviewedAt))
+    && Array.isArray(previous.issues) && previous.issues.length === 0;
+  scaffold.batches = reviewBatches(await reviewContext(jobPath, glossaryPath)).map(batch => {
+    const old = reusable && previous.batches?.find(item => item.cueStart === batch.cueStart && item.cueEnd === batch.cueEnd);
+    const covered = previous?.coverage?.some(item => item.cueStart <= batch.cueStart && item.cueEnd >= batch.cueEnd);
+    const reused = Boolean(old && covered && sameReviewInput(old.input, batch.input));
+    return { ...batch, reused };
   });
+  scaffold.coverage = scaffold.batches.filter(batch => batch.reused).map(({cueStart, cueEnd}) => ({cueStart, cueEnd}));
+  scaffold.instructions = 'Review each batch with reused=false, including its neighboring context. Preserve batches and their input snapshots. Add reviewed ranges to coverage, resolve issues, then set status=passed and reviewedAt. If wording changes, scaffold again. First review and legacy records require full coverage.';
+  await atomicWriteJson(paths.aiReview, scaffold);
+  return scaffold;
 }
 
 function validateSemanticAlignment(sourceCues, semanticCues, issues) {
@@ -338,8 +345,7 @@ function validateProtectedSourceTermBoundaries(masterCues, readableCues, termMat
 function validateChineseReadability(cues, issues) {
   cues.forEach((item, index) => {
     const lines = item.text.split('\n').filter((line) => line.trim());
-    if (lines.length > 2) addIssue(issues, 'error', 'too_many_lines', 'Chinese subtitles allow at most two physical lines.', index + 1);
-    if (lines.length === 2) addIssue(issues, 'warning', 'two_line_exception', 'Review this two-line exception in context.', index + 1);
+    if (lines.length !== 1) addIssue(issues, 'error', 'too_many_lines', 'Readable Chinese requires exactly one physical line.', index + 1);
     for (const line of lines) {
       const units = displayUnits(line);
       if (units > 24) addIssue(issues, 'error', 'line_too_wide', `Chinese line is ${units} display units; maximum is 24.`, index + 1);
@@ -549,7 +555,7 @@ function validateAiReview({ review, jobId, cueCount, issues }) {
   if (unresolved.length > 0) addIssue(issues, 'error', 'ai_review_unresolved_issues', `${unresolved.length} AI review issue(s) remain unresolved.`);
 }
 
-function validateAss(ass, readableZh, readableEn, issues) {
+function validateAss(ass, readableZh, readableEn, issues, language = 'bilingual') {
   let section = '';
   let styleFormat = null;
   let eventFormat = null;
@@ -572,7 +578,7 @@ function validateAss(ass, readableZh, readableEn, issues) {
   if (!eventFormat || eventFormat.length !== 10) addIssue(issues, 'error', 'ass_event_format', 'ASS Events Format must contain exactly 10 fields.');
   if (styleRows.length === 1 && styleRows[0]?.length === 23) {
     try {
-      const expected = buildBilingualAss({ zhCues: readableZh, enCues: readableEn, fontName: styleRows[0][1] });
+      const expected = buildBilingualAss({ zhCues: readableZh, enCues: readableEn, language, fontName: styleRows[0][1] });
       if (ass.replaceAll('\r\n', '\n') !== expected) {
         addIssue(issues, 'error', 'ass_structure_drift', 'ASS must preserve the exact generated header, style, event fields, and override tags. Regenerate it instead of editing it by hand.');
       }
@@ -582,7 +588,7 @@ function validateAss(ass, readableZh, readableEn, issues) {
   }
   const dialogueRows = ass.split(/\r?\n/).filter((line) => /^Dialogue:/i.test(line));
   if (dialogueRows.length !== readableZh.length) addIssue(issues, 'error', 'ass_event_count', `ASS has ${dialogueRows.length} Dialogue events; expected ${readableZh.length}.`);
-  if (dialogueRows.some((line) => (line.match(/\\N/g) ?? []).length !== 1)) {
+  if (dialogueRows.some((line) => (line.match(/\\N/g) ?? []).length !== (language === 'bilingual' ? 1 : 0))) {
     addIssue(issues, 'error', 'ass_row_count', 'Each bilingual ASS event must contain exactly one Chinese row and one English row.');
   }
   let parsed;
@@ -597,7 +603,7 @@ function validateAss(ass, readableZh, readableEn, issues) {
     if (!sameTime(event.start, readableZh[index].start) || !sameTime(event.end, readableZh[index].end)) {
       addIssue(issues, 'error', 'ass_timing_drift', 'ASS event timestamp differs from readable subtitles.', index + 1);
     }
-    const expectedText = cueTextForComparison(`${readableZh[index].text}\n${readableEn[index].text}`);
+    const expectedText = cueTextForComparison(language === 'zh' ? readableZh[index].text : language === 'en' ? readableEn[index].text : `${readableZh[index].text}\n${readableEn[index].text}`);
     if (cueTextForComparison(event.text) !== expectedText) {
       addIssue(issues, 'error', 'ass_text_drift', 'ASS event text differs from readable Chinese/English.', index + 1);
     }
@@ -650,6 +656,7 @@ export async function runQa({ jobPath, job, glossaryPath }) {
     aiReview: paths.aiReview,
     ...(job.options?.bilingualAss ? { readableEn: paths.readableEn, ass: paths.ass } : {}),
     ...(job.options?.chineseTitle ? { title: paths.title } : {}),
+    ...(job.options?.videoDescription ? { description: paths.description } : {}),
   };
   for (const path of Object.values(required)) {
     if (!(await pathExists(path))) throw new UserError(`Required artifact is missing: ${path}`);
@@ -686,6 +693,14 @@ export async function runQa({ jobPath, job, glossaryPath }) {
     validateUntranslatedEnglish(semanticCues, glossary, decisions, issues);
   }
   validateAiReview({ review, jobId: job.id, cueCount: sourceCues.length, issues });
+  if (review.batches) {
+    const current = reviewBatches(await reviewContext(jobPath, glossaryPath));
+    if (!Array.isArray(review.batches) || review.batches.length !== current.length || current.some((batch, index) =>
+      batch.cueStart !== review.batches[index]?.cueStart || batch.cueEnd !== review.batches[index]?.cueEnd
+      || !sameReviewInput(batch.input, review.batches[index]?.input))) {
+      addIssue(issues, 'error', 'ai_review_stale', 'Reviewed inputs changed. Run review scaffold and review affected batches.');
+    }
+  }
   if (job.options?.bilingualAss) {
     const readableEn = parseSrt(artifacts.readableEn.text);
     validateSegmentedLayer(sourceCues, readableEn, issues, {
@@ -702,12 +717,19 @@ export async function runQa({ jobPath, job, glossaryPath }) {
         addIssue(issues, 'error', 'ass_alignment', 'Readable English and Chinese timestamps differ.', index + 1);
       }
     });
-    validateAss(artifacts.ass.text, readableCues, readableEn, issues);
+    validateAss(artifacts.ass.text, readableCues, readableEn, issues, job.options.subtitleLanguage ?? 'bilingual');
   }
   if (job.options?.chineseTitle) {
     const lines = artifacts.title.text.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
     if (lines.length !== 2 || !/^Original:\s*\S+/.test(lines[0]) || !/^Chinese:\s*\S+/.test(lines[1])) {
       addIssue(issues, 'error', 'title_invalid', 'title.zh-Hans.md must contain exactly one non-empty Original line followed by one non-empty Chinese line.');
+    }
+  }
+  if (job.options?.videoDescription) {
+    const description = artifacts.description.text;
+    if (!/^来源：[ \t]*https?:\/\/\S+/m.test(description) || !/^作者：[ \t]*\S+/m.test(description)
+      || !description.split(/\r?\n/).some(line => line.trim() && !/^(#|来源：|作者：)/.test(line))) {
+      addIssue(issues, 'error', 'description_invalid', 'Video description needs a summary, source URL and creator. Use 来源： and 作者： labels.');
     }
   }
   const errors = issues.filter((item) => item.severity === 'error');
