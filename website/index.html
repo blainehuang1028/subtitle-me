@@ -134,16 +134,11 @@
       <section class="comparisons wrap" id="examples" aria-labelledby="examples-title">
         <div class="comparison-heading">
           <h2 id="examples-title">同一句话，<br />差别在哪？</h2>
-          <p>切换三个审校场景，看改写结果，也看规则边界。</p>
+          <p>一次看全三个审校场景：改写结果，也包括规则边界。</p>
         </div>
-        <div class="comparison-demo">
-          <div class="case-tabs" role="tablist" aria-label="字幕审校案例">
-            <button id="case-tone-tab" role="tab" aria-selected="true" aria-controls="case-tone">语气</button>
-            <button id="case-action-tab" role="tab" aria-selected="false" aria-controls="case-action" tabindex="-1">动作</button>
-            <button id="case-boundary-tab" role="tab" aria-selected="false" aria-controls="case-boundary" tabindex="-1">规则边界</button>
-          </div>
-
-          <article class="case-panel is-active" id="case-tone" role="tabpanel" aria-labelledby="case-tone-tab">
+        <div class="comparison-demo" aria-label="三个字幕审校案例">
+          <article class="case-panel">
+            <h3 class="case-label">语气</h3>
             <header class="case-source-line">
               <div><span>原句</span><p lang="en">The consequences have been real.</p></div>
               <p>真实历史译文 · Bungie · 00:20.560–00:22.630</p>
@@ -155,7 +150,8 @@
             <footer class="case-verdict"><strong>少加一层情绪。</strong><p>“沉痛”加重了原句语气。删掉额外判断，让后文具体说明失去了什么。</p></footer>
           </article>
 
-          <article class="case-panel" id="case-action" role="tabpanel" aria-labelledby="case-action-tab">
+          <article class="case-panel">
+            <h3 class="case-label">动作</h3>
             <header class="case-source-line">
               <div><span>原句</span><p lang="en">Once you finish reloading, you can keep firing.</p></div>
               <p>自拟教学案例 · 时间关系保持不变</p>
@@ -167,7 +163,8 @@
             <footer class="case-verdict"><strong>动作说直接一点。</strong><p>省去可推知的主语，把时间从句压短。“换完弹”这个条件仍然在。若原文刻意强调“你”，就不能随便删去。</p></footer>
           </article>
 
-          <article class="case-panel" id="case-boundary" role="tabpanel" aria-labelledby="case-boundary-tab">
+          <article class="case-panel">
+            <h3 class="case-label">规则边界</h3>
             <header class="case-source-line">
               <div><span>原句</span><p lang="en">It’s not a bug. It’s intentional.</p></div>
               <p>自拟教学案例 · 原文正在纠正误解</p>

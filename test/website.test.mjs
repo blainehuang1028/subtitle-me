@@ -89,9 +89,6 @@ async function clipboardFixture(clipboard) {
   vm.runInNewContext(source, {
     navigator: { clipboard },
     document: {
-      querySelectorAll() {
-        return [];
-      },
       querySelector(selector) {
         if (selector === "#command") return command;
         if (selector === "#copy-status") return status;
@@ -135,14 +132,11 @@ test("copy writes the exact installation command and reports success", async () 
   assert.equal(result.selected, false);
 });
 
-test("comparison showcase uses one accessible tabbed proofreading surface", async () => {
+test("comparison showcase keeps all three proofreading cases visible", async () => {
   const html = await read("website/index.html");
-  assert.equal([...html.matchAll(/role="tab"/g)].length, 3);
-  assert.equal([...html.matchAll(/role="tabpanel"/g)].length, 3);
-  for (const id of ["tone", "action", "boundary"]) {
-    assert.ok(html.includes(`aria-controls="case-${id}"`));
-    assert.ok(html.includes(`id="case-${id}" role="tabpanel"`));
-  }
+  assert.equal([...html.matchAll(/class="case-panel"/g)].length, 3);
+  assert.doesNotMatch(html, /role="tab"|role="tabpanel"|aria-selected/);
+  for (const label of ["语气", "动作", "规则边界"]) assert.ok(html.includes(`>${label}</h3>`));
   assert.match(html, /错误避词示意/);
   assert.match(html, /目前尚未进行跨模型或跨 Skill 的同素材测评/);
 });
