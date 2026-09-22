@@ -26,3 +26,5 @@ The author's story is a reading section before installation, sourced from https:
 ## Version 0.2.0 extension
 
 Preserve the incumbent editorial system. Add open feature rows, paired translation examples, an explicit exception, and an in-page changelog. Historical translations and newly edited examples have distinct labels; illustrative sentences are never attributed to an untested model or skill. Link the creator's supplied public profile for actual work without implying every video used the current public package.
+
+The comparison section is one focused proofreading surface rather than a run of article cards. A three-item tab list switches among tone, action, and rule-boundary cases; each panel keeps source, before/after copy, and the editorial reason in one reading path. Use the accessible tabs interaction pattern while retaining native HTML/CSS/JS and the site's black, white, and yellow visual system.

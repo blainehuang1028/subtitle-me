@@ -89,6 +89,9 @@ async function clipboardFixture(clipboard) {
   vm.runInNewContext(source, {
     navigator: { clipboard },
     document: {
+      querySelectorAll() {
+        return [];
+      },
       querySelector(selector) {
         if (selector === "#command") return command;
         if (selector === "#copy-status") return status;
@@ -130,6 +133,18 @@ test("copy writes the exact installation command and reports success", async () 
   assert.equal(copied, install);
   assert.match(result.text, /已复制/);
   assert.equal(result.selected, false);
+});
+
+test("comparison showcase uses one accessible tabbed proofreading surface", async () => {
+  const html = await read("website/index.html");
+  assert.equal([...html.matchAll(/role="tab"/g)].length, 3);
+  assert.equal([...html.matchAll(/role="tabpanel"/g)].length, 3);
+  for (const id of ["tone", "action", "boundary"]) {
+    assert.ok(html.includes(`aria-controls="case-${id}"`));
+    assert.ok(html.includes(`id="case-${id}" role="tabpanel"`));
+  }
+  assert.match(html, /错误避词示意/);
+  assert.match(html, /目前尚未进行跨模型或跨 Skill 的同素材测评/);
 });
 
 test("denied or unavailable clipboard leaves a manual selection and clear status", async () => {
