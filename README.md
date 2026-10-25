@@ -13,115 +13,17 @@
 </p>
 
 <p align="center">
-  译名有谱，字幕有据。为你的 Agent 装上字幕翻译 Skill，项目术语库统一译名，AI 对照原文再审一遍。
+  Translate timed English captions into reviewed Simplified Chinese. Keep names consistent with a project glossary, then have your agent review the translation against the source.
 </p>
 
 <p align="center">
-  <a href="https://skills.heyblaine.com/subtitle-me/">官网</a> ·
-  <a href="#安装">安装</a> ·
-  <a href="#使用">使用</a> ·
-  <a href="#它会做什么">功能</a> ·
-  <a href="#english">English</a>
+  <a href="https://skills.heyblaine.com/subtitle-me/">Website</a> ·
+  <a href="#install">Install</a> ·
+  <a href="#use">Use</a> ·
+  <a href="#features">Features</a>
 </p>
 
-## 安装
-
-```bash
-npx skills@latest add blainehuang1028/subtitle-me
-```
-
-需要 Node.js 20 或更高版本。
-
-![安装和任务初始化示例](./docs/images/quick-start.svg)
-
-## 使用
-
-把 SRT、WebVTT、YouTube JSON3 或 ASS 字幕文件交给 Agent，然后说：
-
-```text
-帮我翻译这个视频
-```
-
-也可以直接说明你想要的产物：
-
-```text
-用 subtitle-me 把 captions.en.srt 翻译成简体中文，
-需要中英双语 ASS，也请给我一个中文标题。
-```
-
-默认交付适合观看的中文 SRT 和中英双语 ASS，每种语言各占一行。明确要求时，只交付中文或英文。视频标题、视频简介按需提供，简介注明来源与作者。
-
-## 它会做什么
-
-- 直接从带时间轴的英文字幕翻译成简体中文
-- 为每个项目建立一份空白术语库，统一人名、品牌和专业词汇
-- 保留忠实原意的翻译版本，并生成更适合单行阅读的观看版本
-- 完成第二轮中英对照审校，再检查漏译、数字、术语和时间轴
-- 默认生成一行中文加一行英文的 ASS，按需选择纯中文或纯英文
-- 按需提供视频标题与带来源、作者的视频简介
-- 按上下文检查译制腔，保留原文语气、条件与梗的作用
-- 修改后复核变化范围及相邻字幕，复用未变且通过的审核范围
-
-![字幕和 QA 结果](./docs/images/qa-result.svg)
-
-所有工作文件都保存在当前项目可见的 `subtitle-localizer/` 目录。术语库不会跨项目共享，也不会预装任何术语。需要联网查询术语时，Agent 会先征求你的同意。
-
-## v0.2.0：自然中文与按范围复核
-
-| 英文／情境 | 修改前 | 本次按规则改写 |
-| --- | --- | --- |
-| The consequences have been real. | 由此带来的后果也是切实而沉痛的。 | 这些后果实实在在。 |
-| Once you finish reloading, you can keep firing. | 当你完成换弹的时候，你就可以继续射击。 | 换完弹就能继续开火。 |
-
-第一行为作者历史项目的真实译文及本次编辑示范；第二行为自拟教学案例。它们不是通用 AI 或其他 Skill 的实测结果，也不是翻译质量排名。[查看来源、上下文与反例](docs/translation-examples.zh-CN.md)。
-
-“不是……而是……”不属于禁词：原文明确纠正误解时，应保留对照。拆短字幕也不会增加阅读时间，条件、否定和关键事实不能因此删去。
-
-[完整 Changelog](CHANGELOG.md) · [看实际字幕作品](https://space.bilibili.com/1602220899)
-
-旧任务保留输出选项；旧审核记录需要一次完整复核才能开始增量复用。单语交付仍保留双语底稿供内部 QA。可读中文字幕统一为一行。
-
-## 输入与产物
-
-支持输入：
-
-- SRT
-- WebVTT
-- YouTube JSON3
-- ASS 对白
-
-主要产物：
-
-- `semantic.zh-Hans.srt`：忠实原意的中文字幕
-- `readable.zh-Hans.srt`：适合屏幕单行阅读的中文字幕
-- `bilingual.zh-en.ass`：默认双语 ASS，也可按要求生成单语
-- `title.zh-Hans.md`：可选的视频标题
-- `description.zh-Hans.md`：可选的视频简介
-- `report.md`：术语、审校和 QA 结果
-
-## 当前边界
-
-`v0.2.0` 需要用户提供带时间轴的英文字幕。它暂不处理语音识别、视频下载、字幕烧录、配音、TTS、平台上传或其他语言对。
-
-生成 ASS 不需要 FFmpeg。只有你要求渲染预览图时才会检查 FFmpeg，缺少时也不会自行安装。
-
-## 兼容性
-
-- Codex：已验证安装和完整示例
-- Hermes Agent、OpenCode、Pi、OpenClaw、Trae：兼容通用 Agent Skill 结构
-- WorkBuddy：从 [GitHub Release](https://github.com/blainehuang1028/subtitle-me/releases) 导入 ZIP
-
-## License
-
-[MIT](./LICENSE) © 2026 Kai Huang
-
----
-
-## English
-
-Subtitle Me turns timed English captions into reviewed Simplified Chinese subtitles. It keeps terminology consistent, improves on-screen readability, and defaults to bilingual ASS with one Chinese and one English row. Explicit single-language output and optional video titles and attributed descriptions are supported.
-
-### Install
+## Install
 
 ```bash
 npx skills@latest add blainehuang1028/subtitle-me
@@ -129,16 +31,85 @@ npx skills@latest add blainehuang1028/subtitle-me
 
 Node.js 20 or newer is required.
 
-Attach an SRT, WebVTT, YouTube JSON3, or ASS file and say:
+![Installation and task initialization example](./docs/images/quick-start.svg)
+
+## Use
+
+Give your agent an SRT, WebVTT, YouTube JSON3, or ASS subtitle file and say:
 
 ```text
 Translate this video with subtitle-me.
 ```
 
-Each project starts with an empty, project-owned glossary. The default result includes readable Simplified Chinese SRT and bilingual ASS, accompanied by terminology and review reports. Project files stay in the visible `subtitle-localizer/` directory.
+You can also specify the outputs:
 
-Version 0.2.0 adds contextual natural-Chinese guidance, review reuse for unchanged ranges, explicit single-language ASS, and video descriptions with source attribution. Changed batches include neighboring context. Old reviews need one full pass before reuse.
+```text
+Use subtitle-me to translate captions.en.srt into Simplified Chinese.
+Deliver bilingual Chinese-English ASS subtitles and a Chinese video title.
+```
 
-Version 0.2.0 does not perform ASR, download media, burn subtitles into video, create dubbing, upload to platforms, or translate arbitrary language pairs. FFmpeg is only needed when you request an ASS preview.
+By default, Subtitle Me delivers readable Chinese SRT and bilingual ASS, with one row per language. You can explicitly request Chinese-only or English-only output. Video titles and descriptions are optional; descriptions include source and author attribution.
 
-Codex has been verified with a complete example. Hermes Agent, OpenCode, Pi, OpenClaw, and Trae follow the same Agent Skill structure. WorkBuddy users can import the ZIP from [GitHub Releases](https://github.com/blainehuang1028/subtitle-me/releases).
+## Features
+
+- Translate timed English subtitles into Simplified Chinese.
+- Start each project with an empty glossary for names, brands, and technical terms.
+- Preserve a faithful translation and generate a separate version for single-line reading.
+- Perform a second source-to-translation review, then check omissions, numbers, terminology, and timing.
+- Generate bilingual ASS by default, with Chinese-only or English-only output on request.
+- Optionally write a video title and a description with source and author attribution.
+- Review natural phrasing in context while preserving tone, conditions, and the role of jokes.
+- Recheck changed cues and their neighbors while reusing unchanged, approved review coverage.
+
+![Subtitles and QA results](./docs/images/qa-result.svg)
+
+All working files stay in the current project's visible `subtitle-localizer/` directory. Glossaries are not shared across projects and contain no preloaded terms. The agent asks for permission before researching terminology online.
+
+## Version 0.2.0: natural phrasing and scoped review
+
+The translation guidance includes two worked examples:
+
+- A real historical translation of "The consequences have been real." added a stronger emotional judgment. The revised example removes that addition and follows the source's intensity.
+- An invented teaching example of "Once you finish reloading, you can keep firing." shows how to make the Chinese more concise while preserving the timing relationship.
+
+These are editing examples, not benchmarks of other skills or general AI translation quality. See the [sources, context, and counterexamples](docs/translation-examples.zh-CN.md).
+
+Contrastive phrasing remains appropriate when the source explicitly corrects a misunderstanding. Splitting a subtitle into shorter cues does not create more reading time; conditions, negation, and key facts must remain intact.
+
+[Full changelog](CHANGELOG.md) · [Subtitle work on Bilibili](https://space.bilibili.com/1602220899)
+
+Existing jobs retain their output options. Old review records need one complete review before incremental reuse. Single-language delivery still retains bilingual working files for internal QA. Readable Chinese subtitles use one line per cue.
+
+## Inputs and outputs
+
+Supported inputs:
+
+- SRT
+- WebVTT
+- YouTube JSON3
+- ASS dialogue
+
+Main outputs:
+
+- `semantic.zh-Hans.srt`: faithful Chinese translation.
+- `readable.zh-Hans.srt`: Chinese subtitles arranged for single-line screen reading.
+- `bilingual.zh-en.ass`: bilingual ASS by default, or single-language output on request.
+- `title.zh-Hans.md`: optional video title.
+- `description.zh-Hans.md`: optional video description.
+- `report.md`: terminology, review, and QA results.
+
+## Current scope
+
+Version 0.2.0 requires timed English subtitles supplied by the user. It does not perform speech recognition, download media, burn subtitles into video, create dubbing or TTS, upload to platforms, or translate arbitrary language pairs.
+
+Generating ASS does not require FFmpeg. FFmpeg is checked only when you request a rendered preview; it is not installed automatically if missing.
+
+## Compatibility
+
+- Codex: installation and a complete example have been verified.
+- Hermes Agent, OpenCode, Pi, OpenClaw, and Trae: compatible with the general Agent Skill structure; not individually verified.
+- WorkBuddy: import a ZIP from [GitHub Releases](https://github.com/blainehuang1028/subtitle-me/releases).
+
+## License
+
+[MIT](./LICENSE) © 2026 Kai Huang
